@@ -66,69 +66,157 @@ TVector<ValType>::TVector(int s, int si)
     {
         throw s;
     }
-    size = s;
+    Size = s;
     pVector = new ValType[Size];
-} /*-------------------------------------------------------------------------*/
+} 
 
 template <class ValType> //конструктор копирования
 TVector<ValType>::TVector(const TVector<ValType> &v)
 {
-} /*-------------------------------------------------------------------------*/
+    Size = v.Size;
+    pVector = new ValType[Size];
+    for (int i = 0; i < Size; i++)
+    {
+        pVector[i] = v.pVector[i];
+    }
+} 
 
 template <class ValType>
 TVector<ValType>::~TVector()
 {
-} /*-------------------------------------------------------------------------*/
+    delete[]pVector;
+} 
 
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-} /*-------------------------------------------------------------------------*/
+    if (pos >= 0 && pos < Size)
+    {
+        return pVector[pos];
+    }
+} 
 
 template <class ValType> // сравнение
 bool TVector<ValType>::operator==(const TVector &v) const
 {
-} /*-------------------------------------------------------------------------*/
+    if (Size != v.Size)
+    {
+        return false;
+    }
+    for (int i = 0; i < Size; i++)
+    {
+        if (pVector[i] != v.pVetor[i])
+        {
+            return false;
+        }
+    }
+    return true;
+} 
 
 template <class ValType> // сравнение
 bool TVector<ValType>::operator!=(const TVector &v) const
 {
-} /*-------------------------------------------------------------------------*/
+    if (Size != v.Size)
+    {
+        return true;
+    }
+    for (int i = 0; i < Size; i++)
+    {
+        if (pVector[i] != v.pVector[i])
+        {
+            return true;
+        }
+    }
+    return false;
+} 
 
 template <class ValType> // присваивание
 TVector<ValType>& TVector<ValType>::operator=(const TVector &v)
 {
-} /*-------------------------------------------------------------------------*/
+    if (this != &v)
+    {
+        if (Size != v.Size)
+        {
+            delete[]pVector;
+            Size = v.Size;
+            pVector = new ValType[Size];
+        }
+        for (int i = 0; i < Size; i++ + )
+        {
+            pVector[i] = v.pVector[i];
+        }
+    }
+} 
 
 template <class ValType> // прибавить скаляр
 TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 {
-} /*-------------------------------------------------------------------------*/
+    Tvector <ValType> v = *this;
+    for (int i = 0; i < Size; i++)
+    {
+        v[i] = pVector[i] + val;
+    }
+    return v;
+} 
 
 template <class ValType> // вычесть скаляр
 TVector<ValType> TVector<ValType>::operator-(const ValType &val)
 {
-} /*-------------------------------------------------------------------------*/
+    TVector <ValType> v = *this;
+    for (int i = 0; i < Size; i++)
+    {
+        v[i] = pVector[i] - val;
+    }
+    return v;
+} 
 
 template <class ValType> // умножить на скаляр
 TVector<ValType> TVector<ValType>::operator*(const ValType &val)
 {
-} /*-------------------------------------------------------------------------*/
+    TVector <ValType> v = *this;
+    for (int i = 0; i < Size; i++)
+    {
+        v[i] = pVector[i] * val;
+    }
+    return v;
+} 
 
 template <class ValType> // сложение
 TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
 {
-} /*-------------------------------------------------------------------------*/
+    TVector <ValType> res = *this;
+    for (int i = 0; i < Size; i++)
+    {
+        res[i] = pVector[i] + v.pVector[i];
+    }
+    return res;
+} 
 
 template <class ValType> // вычитание
 TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
 {
-} /*-------------------------------------------------------------------------*/
+    TVector <ValType> res = *this;
+    for (int i = 0; i < Size; i++)
+    {
+        res[i] = pVector[i] - v.pector[i];
+    }
+    return res;
+} 
 
 template <class ValType> // скалярное произведение
 ValType TVector<ValType>::operator*(const TVector<ValType> &v)
 {
-} /*-------------------------------------------------------------------------*/
+    if (Size != v.Size)
+    {
+        throw v.Size;
+    }
+    ValType res=pVector[0]*v.pVector[0];
+    for (int i = 1; i < Size; i++)
+    {
+        res += pVector[i] * v.pVector[i];
+    }
+    return res
+} 
 
 
 // Верхнетреугольная матрица
