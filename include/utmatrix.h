@@ -62,7 +62,7 @@ public:
 template <class ValType>
 TVector<ValType>::TVector(int s, int si)
 {
-    if (s<0 || s>MAX_VECTOR_SIZE)
+    if (s<=0 || s>MAX_VECTOR_SIZE)
     {
         throw s;
     }
@@ -184,6 +184,10 @@ TVector<ValType> TVector<ValType>::operator*(const ValType &val)
 template <class ValType> // сложение
 TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
 {
+    if (Size != v.Size)
+    {
+        throw v.Size;
+    }
     TVector <ValType> res = *this;
     for (int i = 0; i < Size; i++)
     {
@@ -195,6 +199,10 @@ TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
 template <class ValType> // вычитание
 TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
 {
+    if (Size != v.Size)
+    {
+        throw v.Size;
+    }
     TVector <ValType> res = *this;
     for (int i = 0; i < Size; i++)
     {
