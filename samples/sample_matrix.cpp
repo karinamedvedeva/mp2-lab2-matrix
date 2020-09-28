@@ -6,11 +6,13 @@
 // Тестирование верхнетреугольной матрицы
 
 #include <iostream>
+#include <locale>
 #include "utmatrix.h"
 //---------------------------------------------------------------------------
 
 void main()
 {
+    
   TMatrix<int> a(5), b(5), c(5);
   int i, j;
 
