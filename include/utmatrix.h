@@ -112,7 +112,7 @@ bool TVector<ValType>::operator==(const TVector &v) const
     }
     for (int i = 0; i < Size; i++)
     {
-        if (pVector[i] != v.pVetor[i])
+        if (pVector[i] != v.pVector[i])
         {
             return false;
         }
@@ -219,7 +219,7 @@ TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
     TVector <ValType> res = *this;
     for (int i = 0; i < Size; i++)
     {
-        res[i] = pVector[i] - v.pector[i];
+        res[i] = pVector[i] - v.pVector[i];
     }
     return res;
 } 
@@ -236,7 +236,7 @@ ValType TVector<ValType>::operator*(const TVector<ValType> &v)
     {
         res += pVector[i] * v.pVector[i];
     }
-    return res
+    return res;
 } 
 
 
