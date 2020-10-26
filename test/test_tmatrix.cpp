@@ -91,7 +91,15 @@ TEST(TMatrix, matrices_with_different_size_are_not_equal)
 
 TEST(TMatrix, can_add_matrices_with_equal_size)
 {
-  ADD_FAILURE();
+    TMatrix <int> a(5), b(5), c(5), res(5);
+    for (int i = 0; i < a.GetSize(); i++)
+    {
+        a[i] = i + 1;
+        b[i] = i + 1;
+        c[i] = a[i] + b[i];
+        res[i] = 0;
+    }
+    EXPECT_NE(c, res);
 }
 
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
@@ -101,11 +109,28 @@ TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 
 TEST(TMatrix, can_subtract_matrices_with_equal_size)
 {
-  ADD_FAILURE();
+    TMatrix <int> a(5), b(5), c(5), res(5);
+    for (int i = 0; i < a.GetSize(); i++)
+    {
+        a[i] = i + 1;
+        b[i] = i + 1;
+        res[i] = 0;
+    }
+    ASSERT_ANY_THROW(c = a - b);
+    EXPECT_EQ(c, res);
 }
 
 TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
 {
-  ADD_FAILURE();
+    TMatrix <int> a(5), b(10);
+    for (int i = 0; i < a.GetSize(); i++)
+    {
+        a[i] = i + 1;
+    }
+    for (int i = 0; i < b.GetSize(); i++)
+    {
+        b[i] = i + 1;
+    }
+    ASSERT_ANY_THROW(a - b);
 }
 
