@@ -211,7 +211,7 @@ TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
     TVector <ValType> res = *this;
     for (int i = 0; i < Size; i++)
     {
-        res.pVector[i] = pVector[i] + v.pVector[i];
+       res.pVector[i] = pVector[i] + v.pVector[i];
     }
     return res;
 } 
@@ -288,7 +288,7 @@ TMatrix<ValType>::TMatrix(int s): TVector<TVector<ValType> >(s)
         Size = s;
         for (int i = 0; i < Size; i++)
         {
-            TVector<ValType> tmp(Size - i, i);
+            TVector<ValType> tmp(Size, i);
             pVector[i] = tmp;
         }
     }

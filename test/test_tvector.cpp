@@ -109,8 +109,8 @@ TEST(TVector, can_assign_vectors_of_equal_size)
 TEST(TVector, assign_operator_change_vector_size)
 {
 	TVector <int> a(5), b(10);
-
-	ADD_FAILURE(); 
+	b = a;
+	EXPECT_EQ(a.GetSize(), b.GetSize());
 }
 
 TEST(TVector, can_assign_vectors_of_different_size)
