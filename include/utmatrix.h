@@ -62,21 +62,15 @@ public:
 template <class ValType>
 TVector<ValType>::TVector(int s, int si)
 {
-    if (si<0 || si>MAX_VECTOR_SIZE)
+    if (s <= 0 || si<0 || s>MAX_VECTOR_SIZE || si > MAX_VECTOR_SIZE)
     {
         throw si;
-    }
-    if (s > 0 && s < (MAX_VECTOR_SIZE+1))
-    {
-        Size = s;
-        StartIndex = si;
-        pVector = new ValType[Size];
-    }
-    else
-    {
         throw s;
     }
-} 
+    Size = s;
+    StartIndex = si;
+    pVector = new ValType[Size];
+}
 
 template <class ValType> //конструктор копирования
 TVector<ValType>::TVector(const TVector<ValType> &v)
@@ -99,7 +93,7 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-    if (pos < 0 || pos >= Size)
+    if ((pos-StartIndex) < 0 || (pos-StartIndex) >= Size)
     {
         throw pos;
     }
@@ -279,19 +273,17 @@ public:
 template <class ValType>
 TMatrix<ValType>::TMatrix(int s): TVector<TVector<ValType> >(s)
 {
-    if (s<0 || s>MAX_MATRIX_SIZE)
+    if (s<=0 || s>MAX_MATRIX_SIZE)
     {
         throw s;
     }
-    else
-    {
-        Size = s;
-        for (int i = 0; i < Size; i++)
+    Size = s;
+    StartIndex = 0;
+    for (int i = 0; i < s; i++)
         {
-            TVector<ValType> tmp(Size, i);
+            TVector<ValType> tmp(s-i, i);
             pVector[i] = tmp;
         }
-    }
 } 
 
 template <class ValType> // конструктор копирования
